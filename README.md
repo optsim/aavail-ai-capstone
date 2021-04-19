@@ -31,4 +31,4 @@ Month 2019-11: Actual 9.4e+05, Forecast 9.6e+05, ERROR: 2.0%
 
 Month 2019-12: Actual 2.2e+05, Forecast 6e+05, ERROR: 170.5%
 
-MAE: 22.3%
+MAE (excluding 2019-12): 10.5%
