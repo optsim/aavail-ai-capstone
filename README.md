@@ -5,11 +5,9 @@ This Capstone is done in three parts, focusing on the forecasting.
 
 Part 1: data ingestion and transformation. Files are not consistent with regard to the column name. The data shows a clear seasonality. 
         The data also shows that not all invoice items are viewing, with some special charges. For forecasting purposes, we will only
-        look that the invoice items for the streaming. 
-
-        The value of the invoice is the sum of products between the price of the stream, and # of views of the stream. While there are 
-        many countries in the datasets, there are only handful of countries that had consistent data. Therefore, instead of building
-        forecast for each country, the forecast will be for the overall countries for each month. 
+        look that the invoice items for the streaming. The value of the invoice is the sum of products between the price of the stream, 
+        and # of views of the stream. While there are many countries in the datasets, there are only handful of countries that had 
+        consistent data. Therefore, instead of building forecast for each country, the forecast will be for the overall countries for each month. 
 
 
 Part 2: forecasting method. I took the approach of using Prophet, and specified a yearly seasonality. The forecasting error fitted for 
@@ -18,7 +16,7 @@ Part 2: forecasting method. I took the approach of using Prophet, and specified 
 
 
 Part 3: test on the forecasting approach using the new data sets provided in cs-production. The forecast error for Aug/Sep is around 
-        20~30%. The model had very good forecast for Oct/Nov at only 1~2%. But there is a cliff dropping on December, with forecast 
+        20% to 30%. The model had very good forecast for Oct/Nov at only 1% to 2%. But there is a cliff dropping on December, with forecast 
         at 595K and actual came in just at 220K. Upon further review, there are only 6 days of data from December, thus the big 
         forecasting error. 
 
