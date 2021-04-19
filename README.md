@@ -22,8 +22,13 @@ Part 3: test on the forecasting approach using the new data sets provided in cs-
 
 
 Month 2019-08: Actual 4.4e+05, Forecast 3.1e+05, ERROR: 28.0%
+
 Month 2019-09: Actual 6.3e+05, Forecast 4.9e+05, ERROR: 21.7%
+
 Month 2019-10: Actual 7.5e+05, Forecast 7.6e+05, ERROR: 1.6%
+
 Month 2019-11: Actual 9.4e+05, Forecast 9.6e+05, ERROR: 2.0%
+
 Month 2019-12: Actual 2.2e+05, Forecast 6e+05, ERROR: 170.5%
+
 MAE: 22.3%
