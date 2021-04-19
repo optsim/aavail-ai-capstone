@@ -41,7 +41,7 @@ def test_forecast(df_ts, df_hist):
     cumu_actual = 0
     cumu_abs_error = 0
     for (m, actual, forecast) in forecasts: 
-        print(f"Month {m.strftime('%Y-%m')}: Actual {actual}, Forecast {forecast}, ERROR: {abs(forecast-actual)/actual:.1%}")
+        print(f"Month {m.strftime('%Y-%m')}: Actual {actual:.2}, Forecast {forecast:.2}, ERROR: {abs(forecast-actual)/actual:.1%}")
         cumu_actual += actual
         cumu_abs_error += abs(forecast-actual)
 
