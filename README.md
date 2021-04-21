@@ -20,6 +20,8 @@ Forecasting method. I took the approach of using Prophet, and specified a yearly
 the training data is around 5%. Reasonable. The forecast is made at the daily level, and then combined into monthly for 
 reporting purposes. 
 
+Also developed an exponential smoothing model to serve as coparison. 
+
 
 Part 3
 
