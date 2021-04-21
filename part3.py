@@ -37,6 +37,7 @@ def test_forecast(df_ts, df_hist):
         forecasts.append((m, actual, forecast))
 
     print(forecasts)
+    pd.DataFrame(forecasts, columns=["Month", "Actual", "Forecast"]).to_csv('prophet_forecast.log')
 
     cumu_actual = 0
     cumu_abs_error = 0
@@ -47,8 +48,6 @@ def test_forecast(df_ts, df_hist):
             cumu_abs_error += abs(forecast-actual)
 
     print(f"MAE: {cumu_abs_error/cumu_actual:.1%}")
-    
-    # print(df_ts.head())
 
 if __name__ == "__main__":
     clean = False
