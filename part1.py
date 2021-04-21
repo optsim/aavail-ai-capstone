@@ -27,6 +27,7 @@ import time
 import pandas as pd
 from datetime import date
 import matplotlib.pyplot as plt
+import altair as alt
 
 def convert_to_ts(data_dir, df_orig, clean=False): 
     """Convert data to time series
@@ -51,7 +52,7 @@ def convert_to_ts(data_dir, df_orig, clean=False):
     df_month = pd.merge(df_month, df_customers, how='left', on=['country', 'inv_month'])
     df_month.to_csv(os.path.join(data_dir, "ts_month_data.csv"), index=False)
     
-    df_ts = df_orig[['inv_month', 'inv_date', 'value', 'times_viewed']].groupby(['inv_month', 'inv_date']).sum().reset_index()
+    df_ts = df_orig[['country', 'inv_month', 'inv_date', 'value', 'times_viewed']].groupby(['country', 'inv_month', 'inv_date']).sum().reset_index()
     df_ts.to_csv(output_file, index=False)
 
     return df_ts
@@ -83,9 +84,28 @@ def fetch_ts(data_dir, clean=False):
     df.to_csv(output_file, index=False)
     return df
 
+def visualize(df_ts, save_html=True):
+    alt.Chart(df_ts).mark_line().encode(
+        x=alt.X('inv_date:T', title='Invoice Date'),
+        y=alt.Y('value:Q', title='Invoice Value'),
+        row='country:N'
+    ).properties(height=200, width=250, title=f'Daily Invoice Value for Countries').interactive().save(r"visuals\Daily Invoice Value for Countries.html")
+
+    alt.Chart(df_ts).mark_line().encode(
+        x=alt.X('inv_month:T', title='Invoice Month'),
+        y=alt.Y('sum(value):Q', title='Invoice Value'),
+        row='country:N'
+    ).properties(height=200, width=250, title=f'Monthly Invoice Value for Countries').interactive().save(r"visuals\Monthly Invoice Value for Countries.html")
+
+    alt.Chart(df_ts).mark_line().encode(
+        x=alt.X('inv_month:T', title='Invoice Month'),
+        y=alt.Y('sum(value):Q', title='Invoice Value'),
+    ).properties(height=200, width=250, title=f'Monthly Invoice Value for All Countries').interactive().save(r"visuals\Monthly Invoice Value for All Countries.html")
+
+
 if __name__ == "__main__":
     
-    clean = True
+    clean = False
     
     run_start = time.time() 
     data_dir = os.path.join(".", "cs-train")
@@ -101,11 +121,15 @@ if __name__ == "__main__":
     h, m = divmod(m, 60)
     print("load time:", "%d:%02d:%02d"%(h, m, s))
 
-    fig, ax = plt.subplots()
-    ax.plot('inv_date', 'value', data=df_ts)
-    fig.autofmt_xdate()
-    plt.title("Daily Revenue Over Time")
-    plt.xlabel("Invoice Date")
-    plt.ylabel("Invoice Value")
+    visualize(df_ts, True)
 
-    plt.show()
+    # fig, ax = plt.subplots()
+    # ax.plot('inv_date', 'value', data=df_ts)
+    # fig.autofmt_xdate()
+    # plt.title("Daily Revenue Over Time")
+    # plt.xlabel("Invoice Date")
+    # plt.ylabel("Invoice Value")
+
+    # plt.show()
+
+    

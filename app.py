@@ -24,7 +24,7 @@ def forecast():
     df_ts.sort_values('inv_date', inplace=True)
 
     m = date(request.get_json())
-    _, forecast = get_forecast(df_ts, m)
+    _, forecast, _ = get_forecast(df_ts, m['month'], m['country'])
     return json.dumps({"month":m, "forecast": forecast})
     
 
